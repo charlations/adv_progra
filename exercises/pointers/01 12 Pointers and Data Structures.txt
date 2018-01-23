@@ -1,0 +1,111 @@
+/** 01 12 Pointers and Data Structures
+ *Pointers
+ * 
+ * En el heap no guardo datos, sino guardo las referencias a la localidad de memoria 
+ *  donde se encuentran los datos.
+ *  MALLOC es lo que asigna eso
+ *  En un bloque de 2048 KB, se pueden asignar (2048 * 1024) / 8 = 262144 apuntadores.
+ *    //un apuntador es de 8 Bytes, no bits :O
+ *  En un sistema operativo de 64bits, se supone que puedes hacer 2⁶⁴ = 1.8447*10¹⁹
+ *    //(what?)
+ *  //al parecer esto es en memoria física, pero en memoria virtual es prácticamente 
+ *  //  ilimitada?? (puede ser todo tu disco)
+ * 
+ *Data Stuctures
+ * Metadata puede cambiar de tipo de dato (o.O?)
+ * 
+ * Unions
+ *  Son structs pero en un solo espacio de localidad?
+ *  
+ * Enum
+ *  Son TOKENS, entonces en el ejemplo 
+ *   	enum e_tag {
+ * 			a, b, c, d=10, e, f, g = 20, h
+ * 	 	} var;
+ * 	d y g, e y h son lo mismo
+ * 
+ * 
+ * 
+ * 
+ * 
+ * SE PUEDE CREAR ALIAS USANDO 'typedef' para o escribir de más!!!
+ * 		typedef unsigned char uchar
+ * 		typedef unsigned long long ull
+ * 		typedef char byte
+ * 
+ * 
+**/
+
+
+union type{
+	float f;
+	int i;
+	char name[1024];
+} a, b, c; 
+// como no es anonima (tiene nombre 'type'), después se puede declarar más variables
+//	de ese tipo. En caso contrario (solo escribir 'union {'), no se puede declarar más
+//	tarde en el código más variables de ese tipo 
+union type x;
+x.f = 3.14
+printf("%i", x.i) //se está imprimiento el 3.14, pero como entero
+		//¿se puede declarar x.f y x.i como cosas diferentes?
+		//¡NO! Va a ser la misma información, pero procesada de formas diferentes!
+
+// -------------------------------------------------------------------------- 
+
+struct motocicleta {
+	float desplazamiento;
+}
+
+struct automovil {
+	int asientos;
+	float desplazamiento;
+	int tamano;
+}
+
+union caracteristicas {
+	struct moto a;
+	struct automovil b;
+};
+
+//		ENUM
+enum tipo {
+	MOTOCICLETA, AUTOMOVIL
+};
+
+struct vehiculo {
+	char propietario[x];
+	char marca[x];
+	char modelo[x];
+	int anio;
+	enum tipo t;
+	union caracteristicas c;
+}; 
+
+/**
+ * Diferencias en declaraciones de apuntadores:
+ * 		int* p;								//r, w, mov
+ * 		const int* p;					//r, mov
+ * 		const int const *p; 	//lo equivalente a 'static final x = 10;' en java...
+ * 
+ * IGUAL SE PUEDEN HACER APUNTADORES A FUNCIONES
+ * 		(int) *var (const void *a, const void *b) = compare;
+ * 
+ * 		double fun(int a, float b) {
+ * 			...
+ * 		};
+ * 		
+ * 		int fun2(int a, int b) {
+ * 		 	...
+ * 		};
+ * 		
+ * 		var(x, y);
+ * 		*var = fun;
+ * 		//marcaría error, porque no recibe los mismos tipos de datos NI regresa un entero
+ * 		//pero:
+ * 		*var = fun2;
+ * 		//ya cambió var de compare a fun2 hasta que se vuelva a cambiar o acabe el programa :)
+ * 		
+
+**/
+

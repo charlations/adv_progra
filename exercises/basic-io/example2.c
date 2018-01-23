@@ -23,5 +23,10 @@ int main(int argc, char* argv[]) {
 	write(fd, &buffer, sizeof(char));
 	
 	close(fd);
+	/* Sin el close, el buffer no hace su 'auto-flush', entonces el buffer - que solo se escribe
+		cuando se llena - no se va a escribir si no se llenó. Se trunca lo último de un archivo.
+		Con 'close(fd)', se acaba de escribir lo que estaba en el buffer, entonces es OTRA razón 
+		por la cual siempre usarlo.
+	*/
 	return 0;
 }

@@ -4,7 +4,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 
-#define SIZE 10000 //1048576
+#define SIZE 10000 //1048576	<- bloque de 4kb en una dirección de memoria de 64bits [512*512*4]
 
 int main(int argc, char* argv[]) {
 	int fd_in, fd_out, bytes;
