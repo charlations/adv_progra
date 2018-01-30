@@ -16,8 +16,12 @@ void info(char* directory, char* name, char *program) {
 	char permits[] = {'x', 'w', 'r'};
 	char date[20];
 	struct stat ss;
+	/* Estructuras que, dado el id de un usuario, regresa el nombre
+		y viceversa */
 	struct passwd *pw;
 	struct group *gr;
+	/* Estructura del tiempo desde 1/01/1900 (?) y estructura que 
+		permite un mejor manejo del tiempo (años biciestos, etc) */
 	time_t rawtime;
 	struct tm *timeinfo;
 
@@ -27,6 +31,13 @@ void info(char* directory, char* name, char *program) {
 		exit(-1);
 	}
 	
+	/* hay 2 formas de obtener el tipo de archivo. Usando la 
+		máscara S_IFMT
+		o usando una MACRO S_ISDIR.
+		
+		Usando una máscara no se puede verificar si es enlace,
+		para verificar si es enlace, se deberá usar la MACRO
+		 */
 	if ((ss.st_mode & S_IFMT) == S_IFDIR) {
 		printf("d");
 	} else if (S_ISLNK(ss.st_mode)) {
@@ -36,6 +47,24 @@ void info(char* directory, char* name, char *program) {
 	}
 	
 	for (i = 0; i < 9; i++) {
+		/* Recuerda: ">>" es bitshifting
+				1000 >> 1 = 0100 //divide entre 2
+				0010 << 1 = 0100 //multiplica por 2
+
+				st_mode son 32 bits. los primeros 9 son los permisos. Los 
+				restantes son el tipo de archivo, etc. 
+
+				con el 0400 es "100". lo estoy desplazando i veces. Entonces
+				estoy ANDeando el caracter i con el 1; el resto es 0.
+				Si eso regresa 0 (el caracter i original era 0), regresa 0, y,
+				por ende, es falso. Si regresa algo diferente de 0 es verdadero.
+
+				Como ya se había hecho el arreglo de caracteres de permisos 
+				(permits[]), solo se imprime el caracter que corresponda. 
+
+				(ﾉ◕ヮ◕)ﾉ*:・ﾟ✧
+
+		*/
 		if (ss.st_mode & (0400 >> i)) {
 			printf("%c", permits[(8 - i) % 3]);
 		} else {
