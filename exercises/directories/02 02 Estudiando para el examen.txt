@@ -1,0 +1,12 @@
+ATOMICIDAD
+	|	lseek(fd, 100, SEEK_CURR);
+	|	write(fd, ...);
+
+	Si un proceso A entra a lseek, pero no puede entrar a write, y un proceso B puede hacer ámbos, 
+	no estaría en el lugar que quiere, y cuando regrese A, va a sobreescribir o escribir en un 
+	lugar totalmente perdido.
+
+	Alternativa:
+	|	pread(...);
+	|	pwrite(...);
+	Que lo hacen de manera atómica
