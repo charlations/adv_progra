@@ -1,0 +1,103 @@
+/** 02 09 Standard Input Output
+ * 
+ * Estandar de manejo de archivos en C
+ * 	Es decir; se puede usar en cualquier versión de C en cualquier sistema operativo
+ *	Un código escrito en Unix se puede usar en Windows o Mac sin ninguna modificación
+ *	Otros lenguajes y shells ocupan el mismo formato (fread, fwrite, etc)
+ *		cShell, python, y no me acuerdo cuáles más mencionó.
+ * 	Es mejor para archivos con formato... Si no tiene formato (como el examen), es
+ * 	preferible usar basic-io.
+ * 
+ * Abre los archivos como TEXTO, *NO BINARIO*
+ * 	Para abrir los archivos como binario:
+ * 	|	file = fopen(filename, "rb"); 	<- b para leer en binario (como byte)
+ * 	|	file = fopen(filename, "rw+b"); <- el w+ es para no truncar el archivo
+ * 	|	file = fopen(filename, "rwb");	<- el w solo trunca si el archivo ya existe
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+**/
