@@ -23,10 +23,12 @@ void read_values(char* filename, char* program) {
 	
 	while ( fscanf(file, "%i,%i", &time, &intersections) != EOF ) {
 		/*
-		Lee todo de una sola vez
-		float **m = (float**) malloc(intersections * sizeof(float*));
+		Lee todo de una sola vez y con memoria dinámica
+		float **m = (float**) malloc(intesections * sizeof(float*));
 		int j;
-
+		for (j = 0; j < intersections; j++) {
+			m[j] = (float*) malloc(intersections * sizeof(float));
+		}
 		*/
 		size = intersections * intersections;
 		for (i = 0; i < size; i++) {
