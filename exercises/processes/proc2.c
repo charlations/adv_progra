@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
 	
 	ps = time(0);
 	for (i = 0; i < childs; i++) {
+	/* crea todos los procesos en órden. SÓLO HAY 2 PROCESOS A LA VEZ */
 		if ( (pid = fork()) < 0 ){
 			perror(argv[0]);
 			exit(-1);

@@ -38,9 +38,13 @@ int main(int argc, char* argv[]) {
 			child_process(ps, argv[0]);
 		} else {
 			//wait(NULL);
+			/* No hay wait dentro del crear dentro del for, porque estamos
+			 esperando a que acaben de crearse todos antes de que puedan
+			 acabar. */
 		}
 	}
 	while (i > 0) {
+		/* hasta ACÁ pueden acabar los procesos hijo */
 		pid = wait(NULL);
 		printf("\tPID = %i has ended\n", pid);
 		i--;

@@ -1,0 +1,113 @@
+/**
+ * Una vez que creas un proceso, ya no tienes control de él.
+ *	Puedes controlar las instrucciones del proceso a ejecutar, pero el 
+ *	control de un proceso lo tiene SÓLO el sistema operativo.
+ * 
+ * Race Condition:
+ * 	Múltiples procesos leen un mismo recurso y reaccionan ante él, 
+ * 	pero no necesariamente se reacciona en el mismo orden del que se
+ * 	leyó del recurso. 
+ * 
+ * 	Regiones críticas: áreas críticas para no hechar a perder el 
+ * 	proceso
+ * 
+ * 	Posibles soluciones:
+ * 
+ * 		Dan mayor seguridad, pero pierde velocidad
+ * 	
+ * 		ACID y Atomicidad
+ * 			Muchos procesos corriendo comparten muchos recursos, y esos 
+ * 			recursos deben ser manejados correctamente 
+ * 
+ * 		Semáforos
+ * 			Manejo de datos compartidos en turnos
+ * 
+ * 
+ * A partir del fork(), regresa al proceso padre el pid del proceso 
+ * 	hijo. El proceso hijo recibe como respuesta 0. 
+ * 	Entonces, para determinar si es proceso padre o hijo, se debe 
+ * 	revisar qué valor regresó el fork(). 
+ * 
+ * 	Se ejecutan las tareas que se desean, PERO EL PADRE DEBE ESPERAR
+ * 	A QUE EL PROCESO HIJO ACABE:
+ * 		|	} else {
+ * 		|		wait(NULL);
+ * 		|	}
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * EXEC
+ * 	Al momento que se ejecuta EXEC, SE BORRA TODO EL CÓDIGO EXISTENTE 
+ * 		QUE SIGUE!!!!
+ * 		Por eso se usa exec dentro de un proceso hijo, SÓLO ejecuta esa
+ * 		instrucción nueva. 
+ * 
+ * 
+ * 														exec
+ * 						execl													execv
+ * 						-LIST													-
+ * 						 Enlistas los diferentes			 Enlistas los comandos a
+ * 						 commandos que quieres 				 ejecutar, pero dentro de
+ * 						 que se ejecuten.							 un arreglo ya existente.
+ * 						
+ * 						 NECESITAS PONER EN DÓNDE			 NECESITAS PONER EN DÓNDE
+ * 						 SE ENCUENTRAN LOS BINARIOS		 SE ENCUENTRAN LOS BINARIOS
+ * 						 DE LO QUE QUIERES EJECUTAR 	 DE LO QUE QUIERES EJECUTAR
+ * 
+ * 	execlp							execle					execvp								execve
+ *  -LIST								-LIST						-ARRAY								-ARRAY
+ * 	 LOS BINATIOS SE 		 SE MODIFICAN		 LOS BINATIOS SE 			 MODIFICA
+ * 	 ENCUENTRAN EN EL 	 LOS VALORES		 ENCUENTRAN EN EL 		 LOS 
+ * 	 PATH 							 DE AMBIENTE		 PATH									 VALORES 
+ * 											 MOMENTARIAMENTE 											 DE 
+ * 											 en un arreglo 												 AMBIENTE
+ * 											 de pares: si
+ * 											 quieres cambiar
+ * 											 3 variables, tu
+ * 											 arreglo debe 
+ * 											 tener 6 
+ * 											 localidades. La
+ * 											 primera es la
+ * 											 variable que se
+ * 											 cambia y luego el
+ * 											 nuevo valor.
+ * 
+ * 
+ * 		|	execlp("ls", "ls", "-aR", (char*) 0);
+ * 			ó
+ * 		|	execvp(argv[1], &argv[1]);
+ * 		es argv[1] porque argv[0] es ./a.out, haciendo que infinítamente se
+ * 		corra a sí mismo sin otra instrucción
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+**/

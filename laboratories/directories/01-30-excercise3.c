@@ -63,7 +63,7 @@ void list(char *directory, char *program) {
 		/* AQUÍ EMPIEZA LA ESTADÍSTICA 
 		https://www.gnu.org/software/libc/manual/html_node/Testing-File-Type.html */
 		sprintf(filename, "%s/%s", directory, dir_entry->d_name);	
-		stat(filename, &ss);
+		lstat(filename, &ss);																	//<-- usa Lstat, no stat!!!!!!!!
 		if (S_ISREG(ss.st_mode)) {
 			cantidad[ARCHIVO]++;
 		}
