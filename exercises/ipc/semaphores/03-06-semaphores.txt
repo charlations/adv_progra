@@ -1,0 +1,61 @@
+03-06-semaphores.txt
+
+
+Primera implementación:
+
+|	function V(semaphore S, integer I):		/* signal */
+|		[S <- S + I]
+|	
+|	function P(semaphore S, integer I):		/* wait */
+|		repeat:
+|			[if S >= I:
+|			S <- S - I
+|			break]
+
+	El sistema operativo no tiene control sobre el área crítica. Es el proceso 
+	quien avisa que ya se liberó. Una vez liberado, el sistema operativo 
+	despierta a todos los procesos que estaban esperando y vuelve a haber una
+	competencia por tomar los recursos. 
+	Ésto podía causar "starvation" de un proceso: si tenía muy mala suerte 
+	nunca llegaría a usar los recursos, aunque sí se hacen disponibles. 
+
+Segunda implementación:
+	
+	Se agregó una fila de espera FIFO para asegurar que, tarde o temprano, TODOS
+	los procesos que están en espera 
+
+
+
+
+	Variable de condición:
+		Óptimo para multiplos procesadores
+
+		"Mientras no acabe mi rebanada de tiempo, sigo esperando a que me den el 
+		recurso"
+
+		Esto es para evitar que, si se le da su tiempo a un proceso, no lea que no
+		hay recursos disponibles y se vaya luego luego al queue de esperando recurso
+		cuando, de haber esperado un momentito más, habría recibido los recursos que
+		necesita. Optimización de procesamiento.
+
+
+
+Ejercicio de producer-consumer con empty y full
+	semaforo empty
+	semaforo full
+	semaforo mutex
+
+
+Para el examen va a venir un problema de los capítulos 4 o 5. así que leelos!
+
+|	$ ipcs
+Muestra los semáforos, la memoria compartida y el message queue 
+
+El semáforo no pertenece a algún proceso, es un recurso compartido entre procesos. 
+El control del semáforo lo tiene el sistema operativo, y si mandas a eliminar un
+semáforo, el sistema operatico decide a cuándo borrarlo. (hasta que ya no hayan 
+procesos usándolo)
+
+|	$	ipcrm -s semId	//para semáforo
+|					-m memId	//memoria compartida
+|					-q qID		//Fila de mensajes

@@ -1,0 +1,104 @@
+02 27 - Señales
+
+/**
+ * Hay 3 diferentes reacciones a una señal, dependiendo si se le hizo 
+ * algún tratamiento de ésta. 
+ * 	Se puede ignorar la misma
+ * 
+ * 	Dejar que haga la rutina de tratamiento por defecto, aportada por el
+ * 	kernel. Suele provocar una terminación del proceso, a veces creando 
+ * 	un volcado de memoria del contexto del proceso (core dump). 
+ * 
+ * 	Invocar una rutina propia para tratar la señal. 
+ * 
+ * 
+ *
+ * |	#include <signal.h>
+ * |	int kill(pid_t pid, int sig);
+ * 
+ * 		PID tiene ciertas "trampas":
+ * 		si PID > 0	-	se envía la señal solo al proceso PID
+ * 		si PID = 0	-	se envía la señal a todos los procesos que pertenecen al 
+ * 									mismo grupo del proceso que envió la señal
+ * 		si PID = -1	-	se envía la señal a todos los procesos que pertenecen al 
+ * 									mismo usuario del que envió la señal. Si lo envías tú, se
+ * 									detienen todos los procesos que tú creaste. Si lo envía tu
+ * 									usuario, se detienen todos los procesos que creo tu usuario, 
+ * 									si lo crea alguien con la máscara de super usuario, se 
+ * 									detienen todos los procesos del sistema excepto el 0 (swapper)
+ * 									y el 1 (init).
+ * 		si PID < -1	-	se envía la señal a todos los procesos cuyo identificador de
+ * 									grupo es el mismo que el valor absoluto de PID.
+ * 
+¿¿??								A qué se refiere con grupo de la señal?
+¡¡¡								Todo proceso/archivo/entidad tiene 2 identificadores: usuario y 
+ ¡								el grupo al que pertenece. Es el mismo grupo que sale cuando 
+ ¡								pones ls -la: sale el usuario y luego sale el grupo al que 
+ ¡								pertenece ese usuario. Cualquier archivo/proceso/entidad de unix 
+ ¡								DEBE tener esos 2 identificadores, para que si no se pueden 
+ ¡								ejecutar con los permisos del usuario, se puedan ejecutar con 
+!!!								los del grupo.
+ * 
+ * 
+ * El proceso que recibe la interrupción SIEMPRE regresa a la siguiente linea de 
+ * código de donde fue interrumpido. 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+**/

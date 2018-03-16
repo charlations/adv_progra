@@ -24,9 +24,14 @@ void execute(char* order1, char* order2, char* order3, char* program) {
 			perror(program);
 			exit(-1);
 		} else if (pid == 0) { //CHILD
-			close(1);
-			dup(p2p3[1]);
-			close(p2p3[0]);
+			close(1); //dejar de usar el fd[1] (stdout)
+			dup(p2p3[1]); /*devuelve 1, porque el número más pequeño disponible 
+											es el recien liberado. Entonces el proceso realmente 
+											no se da cuenta que se cambió su stdout */
+			close(p2p3[0]);	/* Como ya se estableció la tubería, ya no se necesitan
+													los file descriptors que se usaron para mandar a 
+													llamar el pipe. No se cierra el pipe, sino el file
+													descriptor que hizo la referencia. */
 			close(p2p3[1]);
 			execlp(order1, order1, (char*) 0);
 		} else { 
@@ -44,8 +49,10 @@ void execute(char* order1, char* order2, char* order3, char* program) {
 		}
 		
 	} else { // GRANDPA
-		close(0);
-		dup(p1p2[0]);
+		close(0);	//cierra la entrada estandar
+		dup(p1p2[0]);	/* En este momento hay 2 cosas manejando la entrada del
+											proceso: la stdin Y el file descriptor. Por eso se
+											cierra luego de esta instrucción. */
 		close(p1p2[0]);
 		close(p1p2[1]);
 		execlp(order3, order3, (char*) 0);

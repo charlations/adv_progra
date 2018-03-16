@@ -5,6 +5,8 @@
 #include <unistd.h>
 #include <limits.h>
 
+/* Genera 1,000,000 de enteros random en un archivo data.dat */
+
 #define SIZE 1000000
 
 int main(int argc, char* argv[]) {

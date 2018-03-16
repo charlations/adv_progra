@@ -1,0 +1,20 @@
+03-06-pipas.txt
+
+stdin siempre es 0
+stdout siempre es 1
+
+
+En pipes.c, al llamar a ejecutar el proceso, se pone en orden:
+|			orden1 orden2 orden3
+ejemplo:
+|			ls | sort | more
+PERO SE EJECUTA EN ORDEN REVERSO:
+|			hijo padre abuelo
+lo que significa que el PROCESO (no orden) 1 es la orden 3. 
+el pipe p1p2 comunica entre la orden 3 y 2, y p2p3 entre la
+orden 2 y 1.
+Ésto es porque el proceso hijo (dígase nieto) es el que pimero 
+tiene que acabar para que el proceso padre (hijo del abuelo) 
+tenga toda la información necesaria y el proceso abuelo reciba
+la información procesada de todos. 
+

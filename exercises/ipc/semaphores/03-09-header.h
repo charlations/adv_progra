@@ -7,10 +7,8 @@
 #include <sys/ipc.h>
 #include <sys/sem.h>
 
-#define PRODUCERS 	0
-#define CONSUMERS 	1
-#define ITEMS		2
-#define SPACES		3
+#define PROCESS_1 0
+#define PROCESS_2 1
 
 int sem_wait(int semid, int semnum, unsigned int val) {
 	struct sembuf op;

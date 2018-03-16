@@ -19,6 +19,7 @@ void a_consumer(char* program) {
 		perror(program);
 		exit(-1);
 	}
+	/* shared memory attach */
 	b = (Buffer*) shmat(shmid, (void*) 0, 0);
 	
 	srand( getpid() );
@@ -49,7 +50,7 @@ void a_consumer(char* program) {
 		
 		sleep(rand() % 10 + 1);
 	}
-	
+	/* shared memory deattach */
 	shmdt(b);
 	exit(0);
 }

@@ -6,19 +6,33 @@
 #include <dirent.h>
 
 void rota(char *directory, char *log_name, int num, int t, char *program) {
-	char filename[NAME_MAX + 1];
+	int checkExist = 1;
+	char filename[NAME_MAX + 1], newfilename[NAME_MAX + 1];
 	DIR *dir;
+	FILE *file;
 	struct dirent *dir_entry;
 
 	if( (dir = opendir(directory)) == NULL ) {
 		perror(program);
 		exit(-1);
 	}
+	printf("Directory opened.\n");
+
+	sprintf(filename, "%s.log", log_name);
+	file = fopen(filename, "r");
+	if( file == NULL) {
+		perror(program);
+		exit(-1);
+	}
+
+	printf("File opened.\n");
+	fclose(file);
+	closedir(dir);
 }
 
 int main(int argc, char* argv[]) {
 	//rotacion directorio_log archivo_log numero tiempo
-	int num, int t;
+	int num, t;
 
 	if( argc != 5 ) {
 		fprintf(stderr, "usage: %s log_directory log_name num time\n", argv[0]);

@@ -9,6 +9,8 @@
 #include <limits.h>
 #include "child.h"
 
+/* gcc child.h child.c main.h -o com */
+
 int main(int argc, char* argv[]) {
 	int fd_out;
 	int number_of_processes, block, *data, num, i, pid;
@@ -30,6 +32,7 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 	
+	/* creo un "archivo temporal" donde los hijos van a escribir. */
 	if ( (fd_out = open("inter", O_WRONLY | O_CREAT | O_TRUNC, 0666)) < 0 ) {
 		perror(argv[0]);
 		exit(-1);
@@ -37,6 +40,7 @@ int main(int argc, char* argv[]) {
 	close(fd_out);
 	
 	block = buffer.st_size / (number_of_processes * sizeof(int));
+	/* un arreglo con todos los pid de los procesos */
 	data = (int*) malloc(number_of_processes * sizeof(int));
 	if (data == 0) {
 		printf("%s: Not enough memory.\n", argv[0]);
@@ -52,6 +56,7 @@ int main(int argc, char* argv[]) {
 			data[i] = pid;
 		}
 	}
+	/* asegurar que todos los procesos estén bien instalados y establecidos */
 	sleep(5);
 	for (i = 0; i < number_of_processes; i++) {
 		printf("PID = %i sending signal to CPID = %i...\n", getpid(), data[i]);

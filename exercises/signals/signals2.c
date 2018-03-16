@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
 		exit(0);
 	} else {
 		sleep(10);
-		printf("PID %i killing to PID %i\n", getpid(), pid);
+		printf("PID %i sending signal to PID %i\n", getpid(), pid);
 		kill(pid, SIGTERM);
 	}
 	return 0;
