@@ -10,8 +10,8 @@
 
 #define SIZE	10
 #define MUTEX	0
-#define EMPTY	1
-#define FULL	2
+#define FREESPACES	1
+#define ITEMS	2
 
 typedef struct buffer {
 	int data[SIZE];
