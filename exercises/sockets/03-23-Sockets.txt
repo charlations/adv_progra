@@ -53,6 +53,6 @@ El bind ocupa un address:
 	struct sockaddr {
 		sa_family_t sa_family; 		<- unsigned short. 
 																	AF_UNIX, AF_LOCAL, AF_INET, AF_INET6, AF_IPX, AF_NETLINK, AF_X25, AF_AX25, AF_ATMPVC, AF_APPLETALK, AF_PACKET, AF_ALG
-		char        sa_data[14];	<- [http://retran.com/beej/sockaddr_inman.html]
+		char        sa_data[14];	ⴽ	 [http://retran.com/beej/sockaddr_inman.html]
 	}
 
