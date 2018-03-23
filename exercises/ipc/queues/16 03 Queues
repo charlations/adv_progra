@@ -1,0 +1,5 @@
+/**
+	Aquí, nosotros ni nos preocupamos por la sincronización. 
+	Todo lo hace el sistema operativo! 
+	Es una cola (hence the QUEUE) de mensajes...
+**/

@@ -1,0 +1,58 @@
+Hay un protocolo para subir un socket
+
+Tipo de Comunicación
+	2 tipos de conexiones 
+		TCP/IP - Orientada a conexión
+		UDP - No orientada a conexión
+	FTP tiene dos canales de conexión
+		1 canal de comunicación dedicado, por donde se transfieren los archivos
+		y otro de navegación, para que se pueda seguir navegando mientras se 
+		transfiere el archivo.
+	X25 - Double passing token bus (IEEE 805)
+	INET, INET6, IPX, NETLINK, AX25, etc...
+	[man7.org/linux/man-pages/man2/socket.2.html]
+
+El comando que se utiliza para saber que va a haber un servicio se reconoce como
+BIND. Normalmente se solicita algún puerto en específico. Hay puertos que ya están
+definidos para protocolos ya aceptados dentro de la suite tcp/ip (0 - 1023) 
+	http: 80; ftp: 20, 21; ssh: 
+Los puertos (1024 - 5000) están apartados para investigación y desarrollo de 
+nuevos protocolos. Son libres, pero se les debe solicitar a una autoridad para 
+que nos lo aparten.
+8080, 8088, 
+A partir del BIND, el servidor está arriba y se queda al pendiente de un LISTEN
+Para que el servidor ya reaccione a alguna solicitud, se usa ACCEPT. 
+A partir de entonces, se establece un nuevo canal de comunicación, porque el 
+original solo se usa para estar escuchando. 
+
+Se pueden tener 3 tipos de servidores:
+	Interactivo - el servidor (el proceso) se encarga de atender al cliente
+		Ventaja: rapidez de servicio a cliente
+		Desventaja: si llega otra conexión, el servidor no lo va a poder atender hasta
+		que el cliente original cierre la conexión
+	Concurrente - cuando existe una conexión, el servidor crea una nueva _entidad_ 
+	para que atienda al cliente. 																					 ⴿ
+																							<Proceso, thread o pull de threads>
+		Ventaja: El servidor ya no está atendiendo al cliente y puede regresar a 
+		esperar nuevas conexiones.
+		Si se tiene muchos recuests por segundos, se pierden muchos recursos 
+		generando procesos (recuerda que la creación de processos es muy costoso)
+			Procesos - Son muy pesados
+			Threads - Un costo menor al de con procesos, pero sigue teniendo 
+			un costo, por lo que sigue la posibilidad de que pueda tronar. 
+			Pull de threads - El costo de generación se paga una sola vez.
+	Selects - Si se tienen una cantidad de peticiones muy alta, pero la solicitud de
+	información no es tan alta. Se mandan todas las peticiones a una cola, y se va 
+	revisando si ocupan información a leer o escribir y se procesa esa solicitud. 
+
+Se define el tipo de comunicación: STREAM, DGRAM, SEQPACKET, RAW, RDM, PACKET, 
+NONBLOCK.
+
+El bind ocupa un address:
+	[http://man7.org/linux/man-pages/man2/bind.2.html]
+	struct sockaddr {
+		sa_family_t sa_family; 		<- unsigned short. 
+																	AF_UNIX, AF_LOCAL, AF_INET, AF_INET6, AF_IPX, AF_NETLINK, AF_X25, AF_AX25, AF_ATMPVC, AF_APPLETALK, AF_PACKET, AF_ALG
+		char        sa_data[14];	<- [http://retran.com/beej/sockaddr_inman.html]
+	}
+

@@ -27,10 +27,11 @@ int main(int argc, char* argv[]) {
         perror(argv[0]);
         return -1;
     }
-    
+    /* IPC_NOWAIT: Si no hay, marca un error (-1) y entonces sale!!!! */
     while (msgrcv(msqid, &msg, length, msg_type, IPC_NOWAIT) != -1) {
 		printf("MESSAGE READ: msg_type = %li process = %li value = %i\n", msg.type, msg.process, msg.value);
 	}
+    printf("No more messages to be read.\n");
 	
 	return 0;
 }
